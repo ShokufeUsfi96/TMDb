@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="15dp"
+    android:paddingTop="15dp"
+    android:paddingRight="30dp"
+    android:paddingLeft="30dp"
+    android:id="@+id/relLayout"
+     tools:context=".features.MovieDetailActivity.DetailActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardv"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/grey">
+
+        <ImageView
+            android:id="@+id/dImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.cardview.widget.CardView>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="10dp"
+        android:background="@drawable/container_style"
+        android:layout_below="@id/cardv"
+        android:layout_above="@+id/btnSave"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/dTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:text="@string/movie_title"
+                android:textColor="@color/black"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/dTime"
+                    android:layout_weight="9"
+                    android:text="@string/runtime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="19sp"
+                    android:drawableLeft="@drawable/ic_time"/>
+                <TextView
+                    android:id="@+id/dRate"
+                    android:layout_weight="1"
+                    android:text="8.1"
+                    android:textSize="20sp"
+                    android:layout_marginTop="4dp"
+                    android:drawableStart="@drawable/ic_star"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:text="RELEASE DATE:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/txt_grey"/>
+                <TextView
+                    android:id="@+id/dDate"
+                    android:layout_weight="1"
+                    android:text="date"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="STORYLINE:"
+                android:textSize="12sp"
+                android:textColor="@color/txt_grey"
+                android:layout_marginTop="30sp"/>
+            <TextView
+                android:id="@+id/dOverview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:lineSpacingExtra="2dp"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+    </ScrollView>
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="@string/add_to_favorite"
+        android:background="@drawable/button_style"
+       android:layout_alignParentBottom="true"/>
+</RelativeLayout>
