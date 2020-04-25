@@ -9,15 +9,17 @@ import androidx.room.RoomDatabase
 @Database(entities = [LocalEntity::class], version = 1)
 public abstract class movieDatabase : RoomDatabase() {
 
-     private  lateinit var DaoInterface : DaoInterface
+    public abstract fun getMovieDao() : MovieDao
 
-    private var movieDB : movieDatabase? = null
-
-    fun getDatabase(context : Context) : movieDatabase?{
+    companion object{
+    fun getDbInstance(context : Context) : movieDatabase? {
+        var movieDB : movieDatabase? = null
         if (movieDB == null) {
-            synchronized(movieDatabase::class) {
-                movieDB = Room.databaseBuilder(context.getApplicationContext(),
-                        movieDatabase::class.java, "movieDB.db")
+            synchronized(this) {
+                movieDB = Room.databaseBuilder(
+                    context.applicationContext,
+                    movieDatabase::class.java, "movieDB.db"
+                )
                     .build()
             }
         }
@@ -25,6 +27,8 @@ public abstract class movieDatabase : RoomDatabase() {
             movieDB = null
         }
         return movieDB
+
+    }
 
     }
 

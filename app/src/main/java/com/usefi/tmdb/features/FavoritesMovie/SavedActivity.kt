@@ -1,4 +1,4 @@
-package com.usefi.tmdb.features.SavedActivity
+package com.usefi.tmdb.features.FavoritesMovie
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

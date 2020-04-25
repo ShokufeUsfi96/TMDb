@@ -1,11 +1,15 @@
-package com.usefi.tmdb.features.MovieDetailActivity
+package com.usefi.tmdb.features.DetailMovie
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.usefi.tmdb.base.BaseViewModel
 import com.usefi.tmdb.pojo.DetailMoviesModel
 import com.usefi.tmdb.repository.NetworkRepository
+import com.usefi.tmdb.repository.local.LocalEntity
+import com.usefi.tmdb.repository.local.movieDatabase
 import com.usefi.tmdb.utils.api_key
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -15,6 +19,9 @@ class DetailViewModel(private val repository : NetworkRepository) : BaseViewMode
     private val disposable = CompositeDisposable()
     private val detailtData = MutableLiveData<DetailMoviesModel>()
     fun getDetailData() : LiveData<DetailMoviesModel> = detailtData
+
+    private val isSaved = MutableLiveData<Boolean>()
+    fun getIsSaved() : LiveData<Boolean> = isSaved
 
 
     fun getmovieData(itemId: Int) {
@@ -31,10 +38,27 @@ class DetailViewModel(private val repository : NetworkRepository) : BaseViewMode
 
     }
 
+
+    fun sendDataToDB(context: Context) {
+
+        val movieObj = LocalEntity(detailtData.value?.id, detailtData.value?.title, detailtData.value?.overview)
+        val db = movieDatabase.getDbInstance(context)
+        disposable.add(
+            db?.getMovieDao()?.insertMovie(movieObj)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe({
+                    Toast.makeText(context, "movie is saved.",Toast.LENGTH_SHORT).show()
+                    isSaved.value = true
+                },{
+                    Toast.makeText(context, it.message.toString(),Toast.LENGTH_SHORT).show()
+                    isSaved.value = false
+                })!!
+        )
+    }
+
     override fun onCleared() {
         super.onCleared()
         disposable.dispose()
     }
-
-
 }

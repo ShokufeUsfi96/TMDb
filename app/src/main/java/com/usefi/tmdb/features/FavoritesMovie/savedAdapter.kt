@@ -1,4 +1,4 @@
-package com.usefi.tmdb.features.SavedActivity
+package com.usefi.tmdb.features.FavoritesMovie
 
 import android.view.View
 import android.view.ViewGroup

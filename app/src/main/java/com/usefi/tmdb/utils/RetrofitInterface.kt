@@ -1,6 +1,7 @@
-package com.usefi.tmdb.Retrofit
+package com.usefi.tmdb.utils
 
 import com.usefi.tmdb.pojo.DetailMoviesModel
+import com.usefi.tmdb.pojo.Genre
 import com.usefi.tmdb.pojo.SearchMoviesModel
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -20,5 +21,10 @@ public interface RetrofitInterface {
         @Path("movie_id")itemId : Int,
         @Query("api_key")api_key: String
     ): Observable<DetailMoviesModel>
+
+    @GET("genre/movie/list?api_key=")
+    fun getGenres(
+        @Query("api_key") api_key: String
+    ): Observable<Genre>
 }
 

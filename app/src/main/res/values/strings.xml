@@ -3,7 +3,7 @@
     <string name="home">Home</string>
     <string name="saved">Saved</string>
     <string name="search_movie">Search movies</string>
-    <string name="add_to_favorite">+ add to Favorite</string>
+    <string name="add_to_favorite">Add to Favorite</string>
     <string name="imdb">IMDB</string>
     <string name="favorites">Favorites</string>
     <string name="search">Search</string>
@@ -11,4 +11,10 @@
     <string name="movie_title">movie title</string>
     <string name="runtime">runTime</string>
     <string name="overview">Overview:</string>
+    <string name="search3Dot">Search…</string>
+    <string name="releasedate">RELEASE DATE:</string>
+    <string name="storyline">STORYLINE :</string>
+    <string name="genres">GENRES :</string>
+    <string name="movie_cover">movie cover</string>
+    <string name="addedToFavorite">Added to Favorite</string>
 </resources>

@@ -14,12 +14,12 @@ import java.util.*
 public data class LocalEntity(
     @PrimaryKey
     @ColumnInfo(name = "movie_id")
-     val movie_id: Int,
+     val movie_id: Int?,
 
     @ColumnInfo(name = "title")
-    val title: String? = null,
+    val title: String? ,
 
     @ColumnInfo(name = "overView")
-     val overView: String? = null
+     val overView: String?
 
 ) : Parcelable
