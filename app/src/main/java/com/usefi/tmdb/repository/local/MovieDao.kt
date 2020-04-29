@@ -9,16 +9,19 @@ import io.reactivex.Single
 @Dao
 public interface MovieDao {
 
-//    @Query("SELECT * FROM movieTable")
-//    fun getAllMovies(): Observable<List<LocalEntity>>
-//
-//    @Query("SELECT * FROM movieTable WHERE movie_id=:movie_id")
-//    fun getMovie(movie_id: Int): Single<Boolean>
+    @Query("SELECT * FROM movieTable")
+    fun getAllMovies(): Observable<List<LocalEntity>>
+
+    @Query("SELECT * FROM movieTable WHERE movie_id= (:movie_id)")
+    fun getMovieByID(movie_id: Int) : Observable<LocalEntity>
+
+    @Query("SELECT COUNT(*) FROM movieTable WHERE movie_id= (:movie_id)")
+    fun checkSavedOrNot(movie_id : Int) : Single<Boolean>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMovie( movie : LocalEntity) : Completable
 
-//    @Query("DELETE FROM movieTable WHERE movie_id = :movie_id")
-//    fun deleteMovie(movie_id: Int) : Completable
+    @Query("DELETE FROM movieTable WHERE movie_id = :movie_id")
+    fun deleteMovie(movie_id: Int?) : Completable
 
 }

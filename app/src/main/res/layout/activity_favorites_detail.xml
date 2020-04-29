@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:id="@+id/relLayout2">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnSave2"
+        android:layout_marginBottom="10dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/constLayout2"
+            tools:context=".features.DetailMovie.DetailActivity">
+
+            <ImageView
+                android:id="@+id/dImage2"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:foreground="@drawable/gradient_image_style"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/dPosterCard2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints"
+                app:cardCornerRadius="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="150dp"
+                android:layout_marginEnd="7dp"
+                app:cardBackgroundColor="@color/grey">
+                <ImageView
+                    android:id="@+id/dPoster2"
+                    android:layout_width="110dp"
+                    android:layout_height="170dp"
+                    android:scaleType="centerCrop"
+                    tools:ignore="MissingConstraints"
+                    android:contentDescription="@string/movie_cover" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/dTitle2"
+                android:layout_width="252dp"
+                android:layout_height="62dp"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/dPosterCard2"
+                app:layout_constraintTop_toBottomOf="@id/dImage2"
+                tools:ignore="MissingConstraints" />
+
+            <LinearLayout
+                android:id="@+id/linearTime2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/dTitle2"
+                app:layout_constraintLeft_toRightOf="@id/dPosterCard2"
+                android:layout_marginStart="9dp"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/dTime2"
+                    android:layout_weight="9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/txt_grey"
+                    android:textSize="14sp"/>
+                <TextView
+                    android:id="@+id/dDate2"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="@color/txt_grey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    tools:ignore="MissingConstraints" />
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/genres2"
+                android:text="@string/genres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/txt_grey"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="15dp"
+                android:textSize="12sp"
+                app:layout_constraintTop_toBottomOf="@+id/dPosterCard2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:ignore="MissingConstraints" />
+            <LinearLayout
+                android:id="@+id/genresList2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/genres2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:ignore="MissingConstraints">
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/ratingLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints"
+                android:paddingBottom="15dp"
+                android:paddingTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/grey"
+                app:layout_constraintTop_toBottomOf="@+id/genresList2">
+                <TextView
+                    android:id="@+id/dRate2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/white"
+                    android:textSize="60sp"
+                    android:layout_marginStart="20dp" />
+
+                <RatingBar
+                    android:id="@+id/ratingbar2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/CustomRatingBar"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="16dp"
+                    android:numStars="5"
+                    android:secondaryProgressTint="@color/Transparent"
+                    android:layout_toEndOf="@+id/dRate2"
+                    android:layout_alignParentTop="true"
+                    android:stepSize="0.1"/>
+
+                <TextView
+                    android:id="@+id/votes2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ratingbar2"
+                    android:layout_marginStart="12dp"
+                    android:layout_toEndOf="@+id/dRate2"
+                    android:textColor="@color/txt_grey"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/storyline2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/storyline"
+                android:textSize="12sp"
+                android:textColor="@color/txt_grey"
+                android:layout_marginTop="30sp"
+                android:layout_marginStart="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/ratingLayout2"
+                tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/dOverview2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:lineSpacingExtra="2dp"
+                android:textSize="15sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@id/storyline2"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+    <Button
+        android:id="@+id/btnSave2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gold"
+        android:text="@string/addedToFavorite"
+        android:background="@drawable/button_style_saved"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

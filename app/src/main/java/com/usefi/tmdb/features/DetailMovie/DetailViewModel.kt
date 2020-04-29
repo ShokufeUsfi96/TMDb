@@ -23,7 +23,6 @@ class DetailViewModel(private val repository : NetworkRepository) : BaseViewMode
     private val isSaved = MutableLiveData<Boolean>()
     fun getIsSaved() : LiveData<Boolean> = isSaved
 
-
     fun getmovieData(itemId: Int) {
         disposable.add(
             repository.getDetail(itemId, api_key)
@@ -38,10 +37,25 @@ class DetailViewModel(private val repository : NetworkRepository) : BaseViewMode
 
     }
 
-
-    fun sendDataToDB(context: Context) {
-
-        val movieObj = LocalEntity(detailtData.value?.id, detailtData.value?.title, detailtData.value?.overview)
+    fun isMovieSaved(itemId: Int, context: Context) {
+        val db = movieDatabase.getDbInstance(context)
+        disposable.add(
+            db?.getMovieDao()?.checkSavedOrNot(itemId)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe({
+                    isSaved.value = it as Boolean
+                },{
+                    Log.d("MYTAG", it.message.toString())
+                })!!
+        )
+    }
+    fun vmInsert(context: Context) {
+        val movieObj = LocalEntity(detailtData.value?.id, detailtData.value?.title,
+            detailtData.value?.overview,detailtData.value?.voteAverage.toString(),
+            detailtData.value?.releaseDate.toString(), detailtData.value?.posterPath.toString()
+        ,detailtData.value?.backdropPath.toString(), detailtData.value?.runtime.toString(),
+        detailtData.value?.genres!![0].name, detailtData.value?.voteCount.toString())
         val db = movieDatabase.getDbInstance(context)
         disposable.add(
             db?.getMovieDao()?.insertMovie(movieObj)
@@ -49,10 +63,26 @@ class DetailViewModel(private val repository : NetworkRepository) : BaseViewMode
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe({
                     Toast.makeText(context, "movie is saved.",Toast.LENGTH_SHORT).show()
+                    Log.d("MYTAG", "saved.")
                     isSaved.value = true
                 },{
                     Toast.makeText(context, it.message.toString(),Toast.LENGTH_SHORT).show()
                     isSaved.value = false
+                })!!
+        )
+    }
+    fun vmDelete(context: Context) {
+        val db = movieDatabase.getDbInstance(context)
+        disposable.add(
+            db?.getMovieDao()?.deleteMovie(detailtData.value?.id)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe({
+                    Toast.makeText(context, "movie is removed.", Toast.LENGTH_SHORT).show()
+                    Log.d("MYTAG","removed.")
+                    isSaved.value = false
+                },{
+                    Log.d("MYTAG",it.message.toString())
                 })!!
         )
     }
@@ -61,4 +91,6 @@ class DetailViewModel(private val repository : NetworkRepository) : BaseViewMode
         super.onCleared()
         disposable.dispose()
     }
+
+
 }

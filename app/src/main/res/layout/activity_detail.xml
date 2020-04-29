@@ -77,7 +77,6 @@
                 <TextView
                     android:id="@+id/dTime"
                     android:layout_weight="9"
-                    android:text="@string/runtime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/txt_grey"

@@ -2,28 +2,33 @@ package com.usefi.tmdb.features.DetailMovie
 
 import android.annotation.SuppressLint
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.text.Layout.JUSTIFICATION_MODE_INTER_WORD
+import android.util.Log
 import android.util.TypedValue
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.squareup.picasso.Picasso
 import com.usefi.tmdb.R
+import com.usefi.tmdb.R.string.add_to_favorite
+import com.usefi.tmdb.R.string.addedToFavorite
 import com.usefi.tmdb.base.extensions.toMinute
 import com.usefi.tmdb.pojo.DetailMoviesModel
 import com.usefi.tmdb.utils.imageBaseURL
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
+
 class DetailActivity : AppCompatActivity() {
 
     private val vm : DetailViewModel by viewModel()
 
+    @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,22 +37,41 @@ class DetailActivity : AppCompatActivity() {
         val itemId = intent.getIntExtra("itemId",0)
         vm.getmovieData(itemId)
 
+        vm.isMovieSaved(itemId,this)
+        vm.getIsSaved().observe(this,Observer{
+            if (it == true){
+                btnSave.text = getString(addedToFavorite)
+                btnSave.setBackgroundResource(R.drawable.button_style_saved)
+                btnSave.setTextColor(getColor(R.color.gold))
+                Log.d("MYTAG","movie exists in DB")
+            }else{
+                btnSave.text = getString(R.string.add_to_favorite)
+                btnSave.setBackgroundResource(R.drawable.button_style)
+                btnSave.setTextColor(getColor(R.color.black))
+                Log.d("MYTAG","movie doesn't exist in DB")
+            }
+        })
+
         vm.getDetailData().observe(this, androidx.lifecycle.Observer{
             setData(it)
         })
 
         btnSave.setOnClickListener {
-            vm.sendDataToDB(this)
-            vm.getIsSaved().observe(this,Observer{
-                if (it == true){
+            when (btnSave.text){
+                getString(addedToFavorite) -> {
+                vm.vmDelete(this)
+                    btnSave.text = getString(R.string.add_to_favorite)
+                    btnSave.setBackgroundResource(R.drawable.button_style)
+                    btnSave.setTextColor(getColor(R.color.black))
+            }
+                getString(add_to_favorite) ->{
+                vm.vmInsert(this)
                     btnSave.text = getString(R.string.addedToFavorite)
                     btnSave.setBackgroundResource(R.drawable.button_style_saved)
                     btnSave.setTextColor(getColor(R.color.gold))
+            }
                 }
-            })
         }
-
-
     }
 
     @SuppressLint("SetTextI18n")
