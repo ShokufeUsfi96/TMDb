@@ -1,9 +1,7 @@
 package com.usefi.tmdb.repository
 
+import com.usefi.tmdb.pojo.*
 import com.usefi.tmdb.utils.RetrofitInterface
-import com.usefi.tmdb.pojo.DetailMoviesModel
-import com.usefi.tmdb.pojo.Genre
-import com.usefi.tmdb.pojo.SearchMoviesModel
 import io.reactivex.Observable
 import retrofit2.Retrofit
 
@@ -17,5 +15,12 @@ class NetworkRepository(private val retrofit : Retrofit) {
         return retrofit.create(RetrofitInterface::class.java).getDetail(itemId, api_key)
     }
 
+    fun getPopulars(api_key: String) : Observable<PopularsModel>{
+        return retrofit.create(RetrofitInterface::class.java).getPopulars(api_key)
+    }
+
+    fun getNowPLaying(api_key: String) : Observable<NowPlayingModel>{
+        return retrofit.create(RetrofitInterface::class.java).getNowPlaying(api_key)
+    }
 
 }

@@ -1,8 +1,6 @@
 package com.usefi.tmdb.utils
 
-import com.usefi.tmdb.pojo.DetailMoviesModel
-import com.usefi.tmdb.pojo.Genre
-import com.usefi.tmdb.pojo.SearchMoviesModel
+import com.usefi.tmdb.pojo.*
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -26,5 +24,15 @@ public interface RetrofitInterface {
     fun getGenres(
         @Query("api_key") api_key: String
     ): Observable<Genre>
+
+    @GET("movie/popular?")
+    fun getPopulars(
+        @Query( "api_key")api_key: String
+    ):Observable<PopularsModel>
+
+    @GET("movie/now_playing?")
+    fun getNowPlaying(
+        @Query("api_key")api_key: String
+    ) : Observable<NowPlayingModel>
 }
 
